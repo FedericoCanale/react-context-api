@@ -1,43 +1,25 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import products from "../data/products";
 
 export default function SingleProduct() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [product, setProduct] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const productId = Number(id);
+    const product = products.find((p) => p.id === productId);
+
 
     useEffect(() => {
-        setIsLoading(true);
-
-        axios
-            .get(`https://fakestoreapi.com/products/${id}`)
-            .then((res) => {
-                setProduct(res.data);
-                setIsLoading(false);
-            })
-            .catch(() => {
-                setIsLoading(false);
-                navigate("/prodotti");
-            });
-    }, [id, navigate]);
-
-    if (isLoading) {
-        return (
-            <div className="single-product-page">
-                <h1 className="single-product-title">Prodotto in caricamento</h1>
-            </div>
-        );
-    }
+        if (!product) {
+            navigate("/prodotti");
+        }
+    }, [product, navigate]);
 
     if (!product) {
         return (
             <div className="single-product-page">
-                <h1 className="single-product-title">
-                    Prodotto non trovato
-                </h1>
+                <h1 className="single-product-title">Prodotto non trovato</h1>
             </div>
         );
     }

@@ -1,18 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import products from "../data/products";
 import { Link } from "react-router-dom";
 
 export default function ProductsPage() {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get("https://fakestoreapi.com/products")
-            .then((res) => {
-                setProducts(res.data);
-            });
-    }, []);
-
     return (
         <div className="products-page">
             <h1 className="products-title">Prodotti</h1>
