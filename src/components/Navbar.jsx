@@ -20,9 +20,16 @@ export default function Navbar() {
                     <Link className="nav-link" to="/prodotti">Prodotti</Link>
                 </div>
 
-                <button className="nav-budget-btn" onClick={toggleBudget}>
+
+                <div className="nav-spacer"></div>
+
+                <button
+                    className={`nav-budget-btn ${budgetMode ? "active" : ""}`}
+                    onClick={toggleBudget}
+                >
                     {budgetMode ? "Disattiva Modalità Budget" : "Attiva Modalità Budget"}
                 </button>
+
             </div>
         </nav>
     );
